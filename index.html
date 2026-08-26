@@ -1,1 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMMSE STORE TOP1</title>
 
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,Tahoma,sans-serif;
+}
+
+body{
+  background:#0b0d12;
+  color:#fff;
+  min-height:100vh;
+}
+
+header{
+  background:linear-gradient(135deg,#11151f,#171d2b);
+  padding:18px;
+  border-bottom:1px solid #292f3d;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.logo span{
+  color:#ffb300;
+}
+
+.balance{
+  margin:14px auto 0;
+  max-width:500px;
+  background:#202633;
+  border:1px solid #353d4d;
+  border-radius:14px;
+  padding:12px;
+  text-align:center;
+}
+
+.balance strong{
+  color:#ffd000;
+  font-size:20px;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+  padding:18px;
+}
+
+.login-box,.card{
+  background:#151a24;
+  border:1px solid #292f3d;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:16px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
+}
+
+h2{
+  margin-bottom:15px;
+}
+
+h3{
+  margin-bottom:12px;
+}
+
+input,select{
+  width:100%;
+  background:#0e1219;
+  border:1px solid #343b4b;
+  color:#fff;
+  border-radius:12px;
+  padding:14px;
+  margin:7px 0;
+  outline:none;
+}
+
+input:focus,select:focus{
+  border-color:#ffb300;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  margin-top:8px;
+  background:#ffb300;
+  color:#111;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+button.secondary{
+  background:#252c39;
+  color:#fff;
+}
+
+button.danger{
+  background:#c62828;
+  color:#fff;
+}
+
+nav{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:16px;
+}
+
+nav button{
+  background:#1b222e;
+  color:#fff;
+  font-size:13px;
+}
+
+nav button.active{
+  background:#ffb300;
+  color:#111;
+}
+
+.product{
+  background:#1d2430;
+  border:1px solid #303848;
+  border-radius:14px;
+  padding:15px;
+  margin:10px 0;
+}
+
+.product-title{
+  font-weight:bold;
+  font-size:17px;
+}
+
+.price{
+  color:#ffd000;
+  font-size:19px;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.message{
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px;
+  background:#202633;
+  text-align:center;
+}
+
+.error{
+  color:#ff7777;
+}
+
+.success{
+  color:#65e69a;
+}
+
+.small{
+  color:#9da6b5;
+  font-size:13px;
+  margin:6px 0;
+}
+
+.section-title{
+  font-size:22px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.user-info{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.logout{
+  width:auto;
+  padding:9px 15px;
+  background:#252c39;
+  color:#fff;
+}
+
+.notice{
+  background:#181f2b;
+  border-right:4px solid #ffb300;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:15px;
+  color:#dce1e8;
+}
+</style>
+</head>
+
+<body>
+
+<header id="siteHeader" class="hidden">
+  <div class="logo">
+    <span>HOMMSE</span> STORE TOP1
+  </div>
+
+  <div class="balance">
+    الرصيد الحالي:
+    <strong id="balanceText">0</strong>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- تسجيل الدخول -->
+<div id="loginPage" class="login-box">
+
+  <h2>🔐 تسجيل الدخول</h2>
+
+  <div class="small">
+    يجب تسجيل الدخول للوصول إلى المتجر
+  </div>
+
+  <input id="loginEmail"
+         type="email"
+         placeholder="Gmail / البريد الإلكتروني">
+
+  <input id="loginPassword"
+         type="password"
+         placeholder="كلمة السر">
+
+  <button onclick="login()">
+    تسجيل الدخول
+  </button>
+
+  <button class="secondary" onclick="showRegister()">
+    إنشاء حساب جديد
+  </button>
+
+  <button class="secondary" onclick="showAgentLogin()">
+    الدخول بواسطة كود وكيل
+  </button>
+
+  <div id="loginMessage"></div>
+
+</div>
+
+
+<!-- إنشاء حساب -->
+<div id="registerPage" class="login-box hidden">
+
+  <h2>📝 إنشاء حساب</h2>
+
+  <input id="regName"
+         placeholder="الاسم">
+
+  <input id="regEmail"
+         type="email"
+         placeholder="Gmail / البريد الإلكتروني">
+
+  <input id="regPhone"
+         placeholder="رقم الهاتف">
+
+  <input id="regPassword"
+         type="password"
+         placeholder="كلمة السر - 6 أحرف/أرقام على الأقل">
+
+  <input id="regAgent"
+         placeholder="كود الوكيل - اختياري">
+
+  <button onclick="registerUser()">
+    إنشاء الحساب
+  </button>
+
+  <button class="secondary" onclick="showLogin()">
+    العودة لتسجيل الدخول
+  </button>
+
+  <div id="registerMessage"></div>
+
+</div>
+
+
+<!-- دخول الوكيل -->
+<div id="agentPage" class="login-box hidden">
+
+  <h2>👤 دخول بواسطة كود وكيل</h2>
+
+  <input id="agentCode"
+         placeholder="أدخل كود الوكيل">
+
+  <button onclick="agentLogin()">
+    دخول
+  </button>
+
+  <button class="secondary" onclick="showLogin()">
+    العودة
+  </button>
+
+  <div id="agentMessage"></div>
+
+</div>
+
+
+<!-- المتجر -->
+<div id="storePage" class="hidden">
+
+  <div class="user-info">
+    <div>
+      مرحباً،
+      <strong id="userName">المستخدم</strong>
+    </div>
+
+    <button class="logout" onclick="logout()">
+      خروج
+    </button>
+  </div>
+
+  <nav>
+    <button class="active" onclick="openSection('freefire',this)">
+      🎮 فري فاير
+    </button>
+
+    <button onclick="openSection('balance',this)">
+      💰 الأرصدة
+    </button>
+
+    <button onclick="openSection('gift',this)">
+      🎁 كود هدية
+    </button>
+  </nav>
+
+
+  <!-- فري فاير -->
+  <section id="freefire">
+
+    <div class="section-title">
+      🎮 فري فاير
+    </div>
+
+    <div class="notice">
+      اختر القسم ثم أدخل بيانات اللاعب المطلوبة قبل الشراء.
+    </div>
+
+    <div class="card">
+
+      <h3>👑 العضويات</h3>
+
+      <input id="membershipId"
+             placeholder="معرف اللاعب ID">
+
+      <select id="membershipServer">
+        <option value="">اختر السيرفر</option>
+        <option>شرق أوسط</option>
+        <option>أوروبا</option>
+      </select>
+
+      <div id="membershipProducts"></div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>💎 الجواهر</h3>
+
+      <input id="diamondId"
+             placeholder="معرف اللاعب ID">
+
+      <select id="diamondServer">
+        <option value="">اختر السيرفر</option>
+        <option>شرق أوسط</option>
+        <option>أوروبا</option>
+        <option>تركي</option>
+      </select>
+
+      <div id="diamondProducts"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- الأرصدة -->
+  <section id="balance" class="hidden">
+
+    <div class="section-title">
+      💰 الأرصدة
+    </div>
+
+
+    <div class="card">
+
+      <h3>📱 رصيد MTN</h3>
+
+      <input id="mtnPhone"
+             placeholder="رقم الهاتف">
+
+      <input id="mtnConfirm"
+             placeholder="تأكيد رقم الهاتف">
+
+      <input id="mtnAmount"
+             type="number"
+             min="10"
+             step="10"
+             placeholder="الكمية">
+
+      <div class="message">
+        السعر: <strong id="mtnPrice">0</strong>
+      </div>
+
+      <button onclick="buyBalance('MTN')">
+        شراء رصيد MTN
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>📱 رصيد Syriatel</h3>
+
+      <input id="syPhone"
+             placeholder="رقم الهاتف">
+
+      <input id="syConfirm"
+             placeholder="تأكيد رقم الهاتف">
+
+      <input id="syAmount"
+             type="number"
+             min="10"
+             step="10"
+             placeholder="الكمية">
+
+      <div class="message">
+        السعر: <strong id="syPrice">0</strong>
+      </div>
+
+      <button onclick="buyBalance('Syriatel')">
+        شراء رصيد Syriatel
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- كود الهدية -->
+  <section id="gift" class="hidden">
+
+    <div class="section-title">
+      🎁 استبدال كود هدايا
+    </div>
+
+    <div class="card">
+
+      <input id="giftCode"
+             placeholder="اكتب كود الهدية">
+
+      <button onclick="redeemGift()">
+        استبدال الكود
+      </button>
+
+      <div id="giftMessage"></div>
+
+    </div>
+
+  </section>
+
+</div>
+
+</div>
+
+
+<script>
+
+let currentUser = null;
+let balance = 0;
+
+
+/* منتجات العضويات */
+
+const memberships = [
+  ["عضوية شهرية",1600],
+  ["عضوية أسبوعية",350],
+  ["عضوية أسبوعية دبل",650],
+  ["حزمة مستوى 6",100],
+  ["حزمة مستوى 10",140],
+  ["حزمة مستوى 15",140],
+  ["حزمة مستوى 20",140],
+  ["حزمة مستوى 25",140],
+  ["حزمة مستوى 30",160]
+];
+
+
+/* منتجات الجواهر */
+
+const diamonds = [
+  ["100 جوهرة",140],
+  ["200 جواهر",280],
+  ["500 جوهرة",700],
+  ["1060 جوهرة",1400],
+  ["2180 جوهرة",2700]
+];
+
+
+/* إنشاء المنتجات */
+
+function renderProducts(){
+
+  const membershipBox =
+    document.getElementById("membershipProducts");
+
+  const diamondBox =
+    document.getElementById("diamondProducts");
+
+  membershipBox.innerHTML = "";
+  diamondBox.innerHTML = "";
+
+  memberships.forEach(item => {
+
+    membershipBox.innerHTML += `
+      <div class="product">
+        <div class="product-title">${item[0]}</div>
+        <div class="price">${item[1]}</div>
+        <button onclick="buyMembership('${item[0]}',${item[1]})">
+          شراء
+        </button>
+      </div>
+    `;
+
+  });
+
+
+  diamonds.forEach(item => {
+
+    diamondBox.innerHTML += `
+      <div class="product">
+        <div class="product-title">${item[0]}</div>
+        <div class="price">${item[1]}</div>
+        <button onclick="buyDiamond('${item[0]}',${item[1]})">
+          شراء
+        </button>
+      </div>
+    `;
+
+  });
+
+}
+
+
+/* تسجيل الدخول التجريبي */
+
+function login(){
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+  const password =
+    document.getElementById("loginPassword").value;
+
+  if(!email || !password){
+
+    showMessage(
+      "loginMessage",
+      "يرجى إدخال البريد الإلكتروني وكلمة السر",
+      "error"
+    );
+
+    return;
+  }
+
+  currentUser = {
+    name: email.split("@")[0],
+    email: email
+  };
+
+  balance = 0;
+
+  localStorage.setItem(
+    "hommseUser",
+    JSON.stringify(currentUser)
+  );
+
+  localStorage.setItem(
+    "hommseBalance",
+    balance
+  );
+
+  enterStore();
+}
+
+
+/* إنشاء حساب تجريبي */
+
+function registerUser(){
+
+  const name =
+    document.getElementById("regName").value.trim();
+
+  const email =
+    document.getElementById("regEmail").value.trim();
+
+  const phone =
+    document.getElementById("regPhone").value.trim();
+
+  const password =
+    document.getElementById("regPassword").value;
+
+  if(!name || !email || !phone || !password){
+
+    showMessage(
+      "registerMessage",
+      "يرجى تعبئة جميع الحقول المطلوبة",
+      "error"
+    );
+
+    return;
+  }
+
+  if(password.length < 6){
+
+    showMessage(
+      "registerMessage",
+      "كلمة السر يجب أن تكون 6 أحرف أو أرقام على الأقل",
+      "error"
+    );
+
+    return;
+  }
+
+  currentUser = {
+    name:name,
+    email:email,
+    phone:phone
+  };
+
+  balance = 0;
+
+  localStorage.setItem(
+    "hommseUser",
+    JSON.stringify(currentUser)
+  );
+
+  localStorage.setItem(
+    "hommseBalance",
+    balance
+  );
+
+  enterStore();
+}
+
+
+/* دخول وكيل تجريبي */
+
+function agentLogin(){
+
+  const code =
+    document.getElementById("agentCode").value.trim();
+
+  if(!code){
+
+    showMessage(
+      "agentMessage",
+      "يرجى إدخال كود الوكيل",
+      "error"
+    );
+
+    return;
+  }
+
+  currentUser = {
+    name:"وكيل",
+    email:"agent@hommse.store"
+  };
+
+  balance = 0;
+
+  localStorage.setItem(
+    "hommseUser",
+    JSON.stringify(currentUser)
+  );
+
+  localStorage.setItem(
+    "hommseBalance",
+    balance
+  );
+
+  enterStore();
+}
+
+
+/* دخول المتجر */
+
+function enterStore(){
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("agentPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("storePage")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("siteHeader")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("userName")
+    .textContent = currentUser.name;
+
+  updateBalance();
+
+  renderProducts();
+
+}
+
+
+/* تحديث الرصيد */
+
+function updateBalance(){
+
+  document
+    .getElementById("balanceText")
+    .textContent = balance;
+
+}
+
+
+/* التحقق من الرصيد */
+
+function checkBalance(price){
+
+  if(balance < price){
+
+    alert("رصيدك غير كافي لإتمام عملية الشراء");
+
+    return false;
+  }
+
+  return true;
+}
+
+
+/* شراء عضوية */
+
+function buyMembership(name,price){
+
+  const id =
+    document.getElementById("membershipId").value.trim();
+
+  const server =
+    document.getElementById("membershipServer").value;
+
+  if(!id){
+
+    alert("يرجى كتابة معرف اللاعب أولاً");
+
+    return;
+  }
+
+  if(!server){
+
+    alert("يرجى اختيار السيرفر");
+
+    return;
+  }
+
+  if(!checkBalance(price)) return;
+
+  balance -= price;
+
+  updateBalance();
+
+  alert(
+    "تم إنشاء طلب " +
+    name +
+    "\\nID: " + id +
+    "\\nالسيرفر: " + server
+  );
+
+}
+
+
+/* شراء جواهر */
+
+function buyDiamond(name,price){
+
+  const id =
+    document.getElementById("diamondId").value.trim();
+
+  const server =
+    document.getElementById("diamondServer").value;
+
+  if(!id){
+
+    alert("يرجى كتابة معرف اللاعب أولاً");
+
+    return;
+  }
+
+  if(!server){
+
+    alert("يرجى اختيار السيرفر");
+
+    return;
+  }
+
+  if(!checkBalance(price)) return;
+
+  balance -= price;
+
+  updateBalance();
+
+  alert(
+    "تم إنشاء طلب " +
+    name +
+    "\\nID: " + id +
+    "\\nالسيرفر: " + server
+  );
+
+}
+
+
+/* حساب سعر MTN */
+
+document
+  .getElementById("mtnAmount")
+  .addEventListener("input",function(){
+
+    const amount =
+      Number(this.value) || 0;
+
+    document
+      .getElementById("mtnPrice")
+      .textContent =
+      (amount / 10) * 12;
+
+  });
+
+
+/* حساب سعر Syriatel */
+
+document
+  .getElementById("syAmount")
+  .addEventListener("input",function(){
+
+    const amount =
+      Number(this.value) || 0;
+
+    document
+      .getElementById("syPrice")
+      .textContent =
+      (amount / 10) * 11;
+
+  });
+
+
+/* شراء رصيد */
+
+function buyBalance(type){
+
+  let phone;
+  let confirmPhone;
+  let amount;
+  let price;
+
+  if(type === "MTN"){
+
+    phone =
+      document.getElementById("mtnPhone").value.trim();
+
+    confirmPhone =
+      document.getElementById("mtnConfirm").value.trim();
+
+    amount =
+      Number(document.getElementById("mtnAmount").value);
+
+    price =
+      (amount / 10) * 12;
+
+  }else{
+
+    phone =
+      document.getElementById("syPhone").value.trim();
+
+    confirmPhone =
+      document.getElementById("syConfirm").value.trim();
+
+    amount =
+      Number(document.getElementById("syAmount").value);
+
+    price =
+      (amount / 10) * 11;
+
+  }
+
+  if(!phone || !confirmPhone || !amount){
+
+    alert("يرجى تعبئة جميع الحقول");
+
+    return;
+  }
+
+  if(phone !== confirmPhone){
+
+    alert("رقم الهاتف وتأكيد الرقم غير متطابقين");
+
+    return;
+  }
+
+  if(!checkBalance(price)) return;
+
+  balance -= price;
+
+  updateBalance();
+
+  alert(
+    "تم إنشاء طلب رصيد " +
+    type +
+    "\\nالكمية: " + amount +
+    "\\nالسعر: " + price
+  );
+
+}
+
+
+/* استبدال كود */
+
+function redeemGift(){
+
+  const code =
+    document.getElementById("giftCode").value.trim();
+
+  if(!code){
+
+    showMessage(
+      "giftMessage",
+      "يرجى كتابة الكود",
+      "error"
+    );
+
+    return;
+  }
+
+  showMessage(
+    "giftMessage",
+    "سيتم ربط أكواد الهدايا بقاعدة البيانات في الخطوة التالية.",
+    "success"
+  );
+
+}
+
+
+/* الأقسام */
+
+function openSection(section,button){
+
+  document
+    .getElementById("freefire")
+    .classList.add("hidden");
+
+  document
+    .getElementById("balance")
+    .classList.add("hidden");
+
+  document
+    .getElementById("gift")
+    .classList.add("hidden");
+
+  document
+    .getElementById(section)
+    .classList.remove("hidden");
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+
+}
+
+
+/* الصفحات */
+
+function showRegister(){
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("agentPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerPage")
+    .classList.remove("hidden");
+
+}
+
+
+function showAgentLogin(){
+
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("agentPage")
+    .classList.remove("hidden");
+
+}
+
+
+function showLogin(){
+
+  document
+    .getElementById("registerPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("agentPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("loginPage")
+    .classList.remove("hidden");
+
+}
+
+
+/* تسجيل الخروج */
+
+function logout(){
+
+  localStorage.removeItem("hommseUser");
+  localStorage.removeItem("hommseBalance");
+
+  currentUser = null;
+  balance = 0;
+
+  document
+    .getElementById("storePage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("siteHeader")
+    .classList.add("hidden");
+
+  showLogin();
+
+}
+
+
+/* رسائل */
+
+function showMessage(id,text,type){
+
+  document.getElementById(id).innerHTML =
+    `<div class="message ${type}">
+      ${text}
+    </div>`;
+
+}
+
+
+/* استعادة الجلسة */
+
+window.addEventListener("load",function(){
+
+  const savedUser =
+    localStorage.getItem("hommseUser");
+
+  if(savedUser){
+
+    currentUser =
+      JSON.parse(savedUser);
+
+    balance =
+      Number(
+        localStorage.getItem("hommseBalance")
+      ) || 0;
+
+    enterStore();
+
+  }
+
+});
+
+</script>
+
+</body>
+  </html>
